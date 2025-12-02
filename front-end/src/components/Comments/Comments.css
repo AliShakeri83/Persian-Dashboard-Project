@@ -3,10 +3,13 @@
   padding: 25px;
   background-color: var(--white);
   line-height: 25px;
-  text-align: justify;
+  text-align: center;
+  font-size: bold;
+  font-size: 20px;
 }
 
 .text-modal-close-btn {
+  cursor: pointer;
   width: 100%;
   padding: 10px 0;
   background-color: var(--blue);

@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import Errorbox from "./../Errorbox/Errorbox";
 import { allCommentsInShop } from "../../Datas";
+import DetailsModal from "./../DetailsModal/DetailsModal";
 
 import "./Comments.css";
 
 export default function Comments() {
   const [allComments, setAllComments] = useState(allCommentsInShop);
+  const [mainCommentBody, setMainCommentBody] = useState("");
+  const [isShowDetailsModal, setIsShowDetailsModal] = useState(false);
+  const closeDetailsModal = () => {
+    setIsShowDetailsModal(false);
+  };
   return (
     <div className="cms-main">
       {allComments.length ? (
@@ -30,7 +36,15 @@ export default function Comments() {
                   {comment.productID}- {comment.productName}
                 </td>
                 <td>
-                  <button className="btn">دیدن متن</button>
+                  <button
+                    className="btn"
+                    onClick={() => {
+                      setMainCommentBody(comment.body);
+                      setIsShowDetailsModal(true);
+                    }}
+                  >
+                    دیدن متن
+                  </button>
                 </td>
                 <td>{comment.date}</td>
                 <td>{comment.hour}</td>
@@ -46,6 +60,14 @@ export default function Comments() {
         </table>
       ) : (
         <Errorbox msg="هیچ کامنتی یافت نشد" />
+      )}
+      {isShowDetailsModal && (
+        <DetailsModal closeDetailsModal={closeDetailsModal}>
+          <p className="text-modal">{mainCommentBody}</p>
+          <button className="text-modal-close-btn" onClick={closeDetailsModal}>
+            بستن
+          </button>
+        </DetailsModal>
       )}
     </div>
   );

@@ -28,7 +28,7 @@ const allProductsInShop = [
 const allCommentsInShop = [
   {
     id: 1,
-    body: "سلام. من از این محصول رضایت کاقی را ندارم",
+    body: "سلام. من از این محصول رضایت کافی را ندارم",
     date: "1404-09-10",
     hour: "18:20",
     userID: 1,
