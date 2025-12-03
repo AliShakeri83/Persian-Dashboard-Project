@@ -1,0 +1,36 @@
+services:
+  mysql:
+    image: mysql:latest
+    container_name: Persian_Dashboard_mysql
+    env_file:
+      - ./.env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    ports:
+      - "3306:3306"
+    volumes:
+      - Persian_Dashboard_mysql_data:/var/lib/mysql
+    networks:
+      - Persian_Dashboard_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: Persian_Dashboard_phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql
+    networks:
+      - Persian_Dashboard_network
+
+volumes:
+  Persian_Dashboard_mysql_data:
+
+networks:
+  Persian_Dashboard_network:
+    external: true
+    name: Persian_Dashboard_network
