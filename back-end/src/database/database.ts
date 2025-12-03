@@ -12,10 +12,7 @@ import "../models/Product";
 import "../models/Category";
 
 export async function connectToDatabase() {
-  try {
-
-    console.log( DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME );
-    
+  try {    
     await sequelize.authenticate();
     console.log("MySQL connected successfully!");
 

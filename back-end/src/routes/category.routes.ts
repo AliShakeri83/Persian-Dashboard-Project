@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as categoryController from "../controllers/categroy.controller";
+import * as categoryController from "../controllers/category.controller";
 
 const categoryRouter = Router();
 
@@ -27,7 +27,6 @@ const categoryRouter = Router();
  *             properties:
  *               title:
  *                 type: string
- *                 description: The title of the category
  *                 example: Electronics
  *     responses:
  *       201:
@@ -37,28 +36,36 @@ const categoryRouter = Router();
  *             schema:
  *               type: object
  *               properties:
- *                 id:
- *                   type: integer
- *                   example: 1
- *                 title:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
  *                   type: string
- *                   example: Electronics
- *                 createdAt:
- *                   type: string
- *                   format: date-time
- *                   example: "2025-12-03T10:00:00.000Z"
- *                 updatedAt:
- *                   type: string
- *                   format: date-time
- *                   example: "2025-12-03T10:00:00.000Z"
+ *                   example: "Category created successfully"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                     title:
+ *                       type: string
+ *                     createdAt:
+ *                       type: string
+ *                       format: date-time
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
  *       400:
- *         description: Invalid input or validation error
+ *         description: Validation error
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 error:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
  *                   type: string
  *                   example: "Title is required"
  */
@@ -76,24 +83,29 @@ categoryRouter.post("/", categoryController.createCategory);
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: integer
- *                     example: 1
- *                   title:
- *                     type: string
- *                     example: Electronics
- *                   createdAt:
- *                     type: string
- *                     format: date-time
- *                     example: "2025-12-03T10:00:00.000Z"
- *                   updatedAt:
- *                     type: string
- *                     format: date-time
- *                     example: "2025-12-03T10:00:00.000Z"
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Categories fetched successfully"
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                       title:
+ *                         type: string
+ *                       createdAt:
+ *                         type: string
+ *                         format: date-time
+ *                       updatedAt:
+ *                         type: string
+ *                         format: date-time
  *       500:
  *         description: Internal server error
  *         content:
@@ -101,7 +113,10 @@ categoryRouter.post("/", categoryController.createCategory);
  *             schema:
  *               type: object
  *               properties:
- *                 error:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
  *                   type: string
  *                   example: "Something went wrong"
  */
@@ -119,7 +134,6 @@ categoryRouter.get("/", categoryController.getAllCategories);
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID of the category to retrieve
  *     responses:
  *       200:
  *         description: Category found
@@ -128,20 +142,25 @@ categoryRouter.get("/", categoryController.getAllCategories);
  *             schema:
  *               type: object
  *               properties:
- *                 id:
- *                   type: integer
- *                   example: 1
- *                 title:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
  *                   type: string
- *                   example: Electronics
- *                 createdAt:
- *                   type: string
- *                   format: date-time
- *                   example: "2025-12-03T10:00:00.000Z"
- *                 updatedAt:
- *                   type: string
- *                   format: date-time
- *                   example: "2025-12-03T10:00:00.000Z"
+ *                   example: "Category fetched successfully"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                     title:
+ *                       type: string
+ *                     createdAt:
+ *                       type: string
+ *                       format: date-time
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
  *       404:
  *         description: Category not found
  *         content:
@@ -149,7 +168,10 @@ categoryRouter.get("/", categoryController.getAllCategories);
  *             schema:
  *               type: object
  *               properties:
- *                 error:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
  *                   type: string
  *                   example: "Category not found"
  */
@@ -167,7 +189,6 @@ categoryRouter.get("/:id", categoryController.getCategoryById);
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID of the category to update
  *     requestBody:
  *       required: true
  *       content:
@@ -177,8 +198,7 @@ categoryRouter.get("/:id", categoryController.getCategoryById);
  *             properties:
  *               title:
  *                 type: string
- *                 description: New title of the category
- *                 example: "Home Appliances"
+ *                 example: Home Appliances
  *     responses:
  *       200:
  *         description: Category updated successfully
@@ -187,20 +207,25 @@ categoryRouter.get("/:id", categoryController.getCategoryById);
  *             schema:
  *               type: object
  *               properties:
- *                 id:
- *                   type: integer
- *                   example: 1
- *                 title:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
  *                   type: string
- *                   example: "Home Appliances"
- *                 createdAt:
- *                   type: string
- *                   format: date-time
- *                   example: "2025-12-03T10:00:00.000Z"
- *                 updatedAt:
- *                   type: string
- *                   format: date-time
- *                   example: "2025-12-03T12:00:00.000Z"
+ *                   example: "Category updated successfully"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                     title:
+ *                       type: string
+ *                     createdAt:
+ *                       type: string
+ *                       format: date-time
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
  *       404:
  *         description: Category not found
  *         content:
@@ -208,7 +233,10 @@ categoryRouter.get("/:id", categoryController.getCategoryById);
  *             schema:
  *               type: object
  *               properties:
- *                 error:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
  *                   type: string
  *                   example: "Category not found"
  */
@@ -226,7 +254,6 @@ categoryRouter.put("/:id", categoryController.updateCategory);
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID of the category to delete
  *     responses:
  *       200:
  *         description: Category deleted successfully
@@ -235,6 +262,9 @@ categoryRouter.put("/:id", categoryController.updateCategory);
  *             schema:
  *               type: object
  *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
  *                 message:
  *                   type: string
  *                   example: "Category deleted successfully"
@@ -245,7 +275,10 @@ categoryRouter.put("/:id", categoryController.updateCategory);
  *             schema:
  *               type: object
  *               properties:
- *                 error:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
  *                   type: string
  *                   example: "Category not found"
  */
