@@ -35,6 +35,7 @@ const allCommentsInShop = [
     username: "علیرضا",
     productID: 1,
     productName: "IPhone 13",
+    isAccept: false,
   },
   {
     id: 2,
@@ -45,6 +46,7 @@ const allCommentsInShop = [
     username: "علی",
     productID: 2,
     productName: "Charger",
+    isAccept: false,
   },
 ];
 
