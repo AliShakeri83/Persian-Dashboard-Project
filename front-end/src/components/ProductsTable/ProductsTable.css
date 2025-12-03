@@ -1,0 +1,93 @@
+.products-table {
+  margin-top: 30px;
+  width: 100%;
+  background-color: var(--white);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.products-table-heading-tr {
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 70px 0 460px;
+}
+
+.products-table-tr {
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px 0 30px;
+}
+
+.products-table th {
+  padding: 20px;
+}
+
+.products-table td {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.products-table-img {
+  object-fit: cover;
+  width: 150px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.products-table-btn {
+  padding: 8px 20px;
+  font-size: 1.1rem;
+  color: var(--white);
+  background-color: var(--blue);
+  margin-right: 20px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+/* Start Edit Modal Child */
+
+.add-products-form-group {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  column-gap: 10px;
+  width: 90%;
+  background-color: #f4f4f4;
+  padding: 0 20px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.add-products-form-group span {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  color: #555;
+}
+
+.edit-product-input {
+  outline: none;
+  border: none;
+  background-color: unset;
+  font-size: 1.1rem;
+  width: 100%;
+  padding: 8px 10px;
+}
+
+/* Finishing */
