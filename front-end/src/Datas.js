@@ -50,4 +50,33 @@ const allCommentsInShop = [
   },
 ];
 
-export { allProductsInShop, allCommentsInShop };
+const allUsersInShop = [
+  {
+    id: 1,
+    firstname: "ali",
+    lastname: "shakeri",
+    username: "alish",
+    password: 1212,
+    phone: 98912345678,
+    city: "fasa",
+    email: "ali@gmail.com",
+    address: "fasa-88",
+    score: 20,
+    buy: 990,
+  },
+  {
+    id: 2,
+    firstname: "alireza",
+    lastname: "sadatmand",
+    username: "alireza",
+    password: 12345678,
+    phone: 98912345678898,
+    city: "fasa",
+    email: "ali@gmail.com",
+    address: "fasa-820",
+    score: 13,
+    buy: 1200,
+  },
+];
+
+export { allProductsInShop, allCommentsInShop, allUsersInShop };

@@ -53,3 +53,25 @@
   -ms-border-radius: 25px;
   -o-border-radius: 25px;
 }
+
+.cms-title {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.btn {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: var(--blue);
+  color: var(--white);
+  font-size: 1.1rem;
+  padding: 3px 20px;
+  font-size: 1.1rem;
+  margin: 8px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
