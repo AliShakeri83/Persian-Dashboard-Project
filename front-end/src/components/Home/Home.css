@@ -1,0 +1,14 @@
+.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* وسط چین افقی */
+  justify-content: center; /* وسط چین عمودی */
+  height: 80vh; /* کل ارتفاع صفحه */
+  text-align: center;
+}
+
+.welcome h1,
+.welcome h2 {
+  font-size: 2rem;
+  margin: 20px 0; /* فاصله استاندارد */
+}

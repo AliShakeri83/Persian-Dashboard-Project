@@ -22,13 +22,13 @@
   -o-transition: all 0.5s ease-in-out;
 }
 
-.sidebar-links li {
+.sidebar-links a {
   position: relative;
   padding: 16px;
 }
 
-.sidebar-links li a {
-  width: 100%;
+.sidebar-links a {
+  width: 85%;
   text-decoration: none;
   color: var(--white);
   display: flex;
@@ -36,13 +36,17 @@
   align-items: center;
   font-size: 1.3rem;
 }
+.sidebar-links a:hover {
+  background-color: #391588;
+  color: var(--white);
+}
 
 .active {
   background-color: #391588;
   line-height: 200%;
 }
 
-.sidebar-links li:first-child {
+.sidebar-links a:first-child {
   margin-bottom: 20px;
 }
 
