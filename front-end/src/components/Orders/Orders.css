@@ -1,0 +1,54 @@
+.orders-container {
+  padding: 20px;
+  font-family: 'Vazir', sans-serif;
+  direction: rtl;
+  background-color: #f9f9f9;
+}
+
+.orders-container h2 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.orders-table th,
+.orders-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.orders-table th {
+  background-color: #eee;
+  color: #444;
+}
+
+.btn {
+  margin: 0 3px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.details {
+  background-color: #6c5ce7;
+  color: white;
+}
+
+.edit {
+  background-color: #00b894;
+  color: white;
+}
+
+.delete {
+  background-color: #d63031;
+  color: white;
+}

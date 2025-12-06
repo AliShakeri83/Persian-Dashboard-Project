@@ -17,7 +17,7 @@ export default function Header() {
 
       <div className="header-left-section">
         <div className="search-box">
-          <input type="text" placeholder="جست و جو کنید ..." />
+          <input type="text" placeholder="جستجو کنید ..." />
           <button>جست و جو</button>
         </div>
 

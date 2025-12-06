@@ -79,4 +79,38 @@ const allUsersInShop = [
   },
 ];
 
-export { allProductsInShop, allCommentsInShop, allUsersInShop };
+const allOrdersInShop = [
+  {
+    id: 1,
+    productID: "محصول B",
+    userID: "کاربر 102",
+    date: "1404/09/18",
+    hour: "20:30",
+    price: 30000,
+    off: 50,
+    sale: 66000,
+    count: 6,
+    sale_count: 3,
+    isActive: false,
+  },
+  {
+    id: 2,
+    productID: "محصول A",
+    userID: "کاربر 101",
+    date: "1404/09/15",
+    hour: "14:30",
+    price: 500000,
+    off: 10,
+    sale: 450000,
+    count: 2,
+    sale_count: 1,
+    isActive: true,
+  },
+];
+
+export {
+  allProductsInShop,
+  allCommentsInShop,
+  allUsersInShop,
+  allOrdersInShop,
+};
