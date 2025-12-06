@@ -82,8 +82,8 @@ const allUsersInShop = [
 const allOrdersInShop = [
   {
     id: 1,
-    productID: "محصول B",
-    userID: "کاربر 102",
+    productID: "Charger",
+    userID: "ali",
     date: "1404/09/18",
     hour: "20:30",
     price: 30000,
@@ -95,8 +95,8 @@ const allOrdersInShop = [
   },
   {
     id: 2,
-    productID: "محصول A",
-    userID: "کاربر 101",
+    productID: "IPhone 13",
+    userID: "alireza",
     date: "1404/09/15",
     hour: "14:30",
     price: 500000,
