@@ -108,9 +108,29 @@ const allOrdersInShop = [
   },
 ];
 
+const allOffInShop = [
+  {
+    id: 1,
+    code: "test",
+    precent: "50",
+    productID: "IPhone",
+    date: "1404/10/01",
+    isActive: false,
+  },
+  {
+    id: 2,
+    code: "test2",
+    precent: "100",
+    productID: "Charger",
+    date: "1404/12/15",
+    isActive: false,
+  },
+];
+
 export {
   allProductsInShop,
   allCommentsInShop,
   allUsersInShop,
   allOrdersInShop,
+  allOffInShop,
 };
