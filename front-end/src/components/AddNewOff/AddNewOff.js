@@ -52,24 +52,26 @@ export default function AddNewOff() {
                 className="add-products-input"
               />
             </div>
-            <div className="add-off-form-group">
-              <input
-                value={offDate}
-                onChange={(e) => setOffDate(e.target.value)}
-                type="text"
-                placeholder="مدت اعتبار کد تخفیف را وارد نمایید"
-                className="add-products-input"
-              />
-            </div>
+            <select
+              value={offDate}
+              onChange={(e) => setOffDate(e.target.value)}
+              className="option-select-box"
+            >
+              <option value="">مدت اعتبار را انتخاب کنید</option>
+              <option value="7">۷ روز</option>
+              <option value="14">۱۴ روز</option>
+              <option value="30">۳۰ روز</option>
+              <option value="60">۶۰ روز</option>
+            </select>
+
             <div className="add-select-course">
-              <label for="cars">دوره</label>
-              <br />
               <select
                 onChange={(e) => setOffProductTitle(e.target.value)}
                 className="option-select-box"
                 id="cars"
                 name="cars"
               >
+                <option value="">محصول</option>
                 {allProduct.map((product) => (
                   <option key={product.id} value={product.title}>
                     {product.title}
