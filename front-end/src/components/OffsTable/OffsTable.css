@@ -1,0 +1,13 @@
+.off-table-td {
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0 10px 0 30px;
+}
+
+.off-table-tr {
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0 0 0 300px;
+}

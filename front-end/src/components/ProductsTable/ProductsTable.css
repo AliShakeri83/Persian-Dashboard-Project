@@ -44,6 +44,7 @@
 }
 
 .products-table-btn {
+  cursor: pointer;
   padding: 8px 20px;
   font-size: 1.1rem;
   color: var(--white);
