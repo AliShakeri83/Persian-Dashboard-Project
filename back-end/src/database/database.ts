@@ -10,6 +10,10 @@ export const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
 
 import "../models/Product";
 import "../models/Category";
+import "../models/User";
+import "../models/Comment";
+import "../models/Order";
+import "../models/Discount";
 
 export async function connectToDatabase() {
   try {    
