@@ -11,7 +11,7 @@ export class Users extends Model<IUser, UserCreationAttributes>
   public firstname!: string;
   public lastname!: string;
   public username!: string;
-  public password!: number;
+  public password!: string;
   public phone!: string;
   public city!: string;
   public email!: string;
@@ -44,7 +44,7 @@ Users.init(
       allowNull: false,
     },
     password: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     phone: {
