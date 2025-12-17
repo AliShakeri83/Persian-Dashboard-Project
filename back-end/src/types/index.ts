@@ -62,7 +62,7 @@ export interface IOrder {
   date: string;
   hour: string;
   price: bigint;
-  off?: number;
+  discount?: string;
   sale?: number;
   saleCount?: bigint;
   isActive?: boolean;

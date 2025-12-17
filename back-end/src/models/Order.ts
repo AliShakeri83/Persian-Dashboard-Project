@@ -15,7 +15,7 @@ export class Orders extends Model<IOrder, OrderCreationAttributes>
   public date!: string;
   public hour!: string;
   public price!: bigint;
-  public off!: number;
+  public discount!: string;
   public sale!: number;
   public saleCount!: bigint;
   public isActive!: boolean;
@@ -59,8 +59,8 @@ Orders.init(
       type: DataTypes.BIGINT,
       allowNull: false,
     },
-    off: {
-      type: DataTypes.INTEGER,
+    discount: {
+      type: DataTypes.STRING,
       defaultValue: 0,
     },
     sale: {
