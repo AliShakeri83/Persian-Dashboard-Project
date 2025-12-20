@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import DeleteModal from "./../DeleteModal/DeleteModal";
 import DetailsModal from "./../DetailsModal/DetailsModal";
 import EditModal from "../EditModal/EditModal";
 import { AiOutlineDollarCircle } from "react-icons/ai";
 import Errorbox from "./../Errorbox/Errorbox";
 import { ToastContainer, toast } from "react-toastify";
+import useProducts from "../../Hooks/useProducts";
 
 import "./ProductsTable.css";
 
-export default function ProductsTable({ allProducts }) {
+export default function ProductsTable() {
   const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);
   const [isShowDetailsModal, setIsShowDetailsModal] = useState(false);
   const [isShowEditModal, setIsShowEditModal] = useState(false);
@@ -23,16 +24,20 @@ export default function ProductsTable({ allProducts }) {
   const [productNewSale, setproductNewSale] = useState("");
   const [productNewColors, setproductNewColors] = useState("");
 
+  const [isLoading, setIsLoding] = useState(true);
+  const [getAllProduct, setGetAllProduct] = useState([]);
+  const { deleteProduct, updateProduct } = useProducts();
+
   const deleteModalCancelAction = () => {
     setIsShowDeleteModal(false);
     console.log("مودال حذف بسته شد");
   };
   const notify = () => toast("محصول با موفقیت حذف شد");
   const deleteModalSubmitAction = () => {
-    console.log(productID);
-    console.log("حذف انجام شد");
+    deleteProduct(productID);
+    finishGetAllProduct();
     setIsShowDeleteModal(false);
-    notify();
+    toast("محصول با موفقیت حذف شد");
   };
   const closeDetailsModal = () => {
     setIsShowDetailsModal(false);
@@ -41,7 +46,7 @@ export default function ProductsTable({ allProducts }) {
 
   const updateProductInfos = (e) => {
     e.preventDefault();
-    const productsNewInfos = {
+    updateProduct(productID, {
       title: productNewTitle,
       price: productNewPrice,
       count: productNewCount,
@@ -49,15 +54,27 @@ export default function ProductsTable({ allProducts }) {
       popularity: productNewPopularity,
       sale: productNewSale,
       colors: productNewColors,
-    };
-    console.log(productsNewInfos);
-    console.log("updateing product");
+    });
+    finishGetAllProduct();
+    setIsShowEditModal(false);
   };
 
+  useEffect(() => {
+    finishGetAllProduct();
+  });
+
+  const finishGetAllProduct = () => {
+    fetch("http://localhost:8000/api/v1/products")
+      .then((res) => res.json())
+      .then((result) => {
+        setGetAllProduct(result);
+        setIsLoding(false);
+      });
+  };
   return (
     <>
       <ToastContainer />
-      {!allProducts.length ? (
+      {isLoading ? (
         <Errorbox msg="هیچ محصولی یافت نشد" />
       ) : (
         <table className="products-table">
@@ -70,7 +87,7 @@ export default function ProductsTable({ allProducts }) {
             </tr>
           </thead>
           <tbody>
-            {allProducts.map((product) => (
+            {getAllProduct.data.map((product) => (
               <tr key={product.id} className="products-table-tr">
                 <td>
                   <img
@@ -147,7 +164,7 @@ export default function ProductsTable({ allProducts }) {
                 <tr>
                   <td>{mainProductInfos.popularity}%</td>
                   <td>{mainProductInfos.sale.toLocaleString()}</td>
-                  <td>{mainProductInfos.colors}</td>
+                  <td>{mainProductInfos.color}</td>
                 </tr>
               </tbody>
             </table>

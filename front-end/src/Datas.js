@@ -102,7 +102,7 @@ const allOrdersInShop = [
     price: 500000,
     off: 10,
     sale: 450000,
-    count: 2,
+    // count: 2, 
     sale_count: 1,
     isActive: true,
   },

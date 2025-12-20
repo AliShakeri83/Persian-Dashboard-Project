@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import useProducts from "../../Hooks/useProducts";
 
 import "./AddNewProduct.css";
 
-export default function AddNewProduct({ allProducts, setAllProducts }) {
+export default function AddNewProduct() {
+  const { getAllProducts, allProducts } = useProducts();
   const [newProductTitle, setNewProductTitle] = useState("");
   const [newProductPrice, setNewProductPrice] = useState("");
   const [newProductCount, setNewProductCount] = useState("");
@@ -10,6 +12,8 @@ export default function AddNewProduct({ allProducts, setAllProducts }) {
   const [newProductPopularity, setNewProductPopularity] = useState("");
   const [newProductSale, setNewProductSale] = useState("");
   const [newProductColors, setNewProductColors] = useState("");
+  const [newProductDescription, setNewProductDescription] = useState("");
+  const [newProductCategory, setNewProductCategory] = useState("");
 
   const addNewProduct = (e) => {
     e.preventDefault();
@@ -17,13 +21,33 @@ export default function AddNewProduct({ allProducts, setAllProducts }) {
       title: newProductTitle,
       price: newProductPrice,
       count: newProductCount,
-      img: newProductImg,
+      img_url: newProductImg,
       popularity: newProductPopularity,
       sale: newProductSale,
-      colors: newProductColors,
+      color: newProductColors,
+      description: newProductDescription,
+      categoryId: newProductCategory,
     };
-    console.log("محصول جدید اضافه شد");
-    setAllProducts((prev) => [...prev, newProductInfos]);
+    fetch("http://localhost:8000/api/v1/products", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newProductInfos),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log("محصول جدید اضافه شد");
+        setNewProductTitle("");
+        setNewProductPrice("");
+        setNewProductCount("");
+        setNewProductImg("");
+        setNewProductPopularity("");
+        setNewProductSale("");
+        setNewProductColors("");
+        setNewProductDescription("");
+        setNewProductCategory("");
+      });
   };
 
   return (
@@ -106,6 +130,28 @@ export default function AddNewProduct({ allProducts, setAllProducts }) {
               value={newProductColors}
               onChange={(event) => {
                 setNewProductColors(event.target.value);
+              }}
+            />
+          </div>
+          <div className="add-products-form-group">
+            <input
+              type="text"
+              placeholder="توضیحات محصول را بنویسید"
+              className="add-products-input"
+              value={newProductDescription}
+              onChange={(event) => {
+                setNewProductDescription(event.target.value);
+              }}
+            />
+          </div>
+          <div className="add-products-form-group">
+            <input
+              type="text"
+              placeholder="دسته بندی محصول را بنویسید"
+              className="add-products-input"
+              value={newProductCategory}
+              onChange={(event) => {
+                setNewProductCategory(event.target.value);
               }}
             />
           </div>
