@@ -4,9 +4,16 @@ export default function useProducts() {
   const [allProducts, setAllProducts] = useState([]);
 
   const getAllProducts = async () => {
-    const res = await fetch("http://localhost:8000/api/v1/products");
-    const data = await res.json();
-    setAllProducts(data);
+    try {
+      const res = await fetch("http://localhost:8000/api/v1/products");
+      const data = await res.json();
+
+      console.log("API DATA:", data.data);
+
+      setAllProducts(data.data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const deleteProduct = async (id) => {
@@ -39,7 +46,6 @@ export default function useProducts() {
   }, []);
 
   return {
-    getAllProducts,
     allProducts,
     addProduct,
     deleteProduct,
