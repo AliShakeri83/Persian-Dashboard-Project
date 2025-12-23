@@ -76,7 +76,7 @@ export default function ProductsTable({
         </thead>
 
         <tbody>
-          {allProducts.map((product) => (
+          {allProducts.reverse().map((product) => (
             <tr key={product.id} className="products-table-tr">
               <td>
                 <img
