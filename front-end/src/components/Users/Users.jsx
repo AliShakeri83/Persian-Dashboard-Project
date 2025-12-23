@@ -39,7 +39,7 @@ export default function Users() {
         await new Promise((resolve) => setTimeout(resolve, 500));
         setUsers(allUsers);
       } catch (error) {
-        console.error("Error fetching comments:", error);
+        console.error("Error fetching users:", error);
       } finally {
         setIsLoading(false);
       }
@@ -104,7 +104,7 @@ export default function Users() {
             </thead>
             <tbody>
               {users.map((user) => (
-                <tr>
+                <tr key={user.id}>
                   <td>
                     {user.firstname} {user.lastname}
                   </td>
