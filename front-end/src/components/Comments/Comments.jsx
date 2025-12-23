@@ -24,15 +24,10 @@ export default function Comments() {
   const [commentID, setCommentID] = useState(null);
 
   useEffect(() => {
-    // شبیه‌سازی دریافت داده با تاخیر
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        // در اینجا می‌توانید API call واقعی داشته باشید
-        // برای نمونه، یک تاخیر کوچک اضافه می‌کنیم
         await new Promise((resolve) => setTimeout(resolve, 500));
-
-        // داده‌ها را از hook دریافت می‌کنیم
         setAllComments(commentsInShop);
       } catch (error) {
         console.error("Error fetching comments:", error);
@@ -218,6 +213,19 @@ export default function Comments() {
             value={mainCommentBody}
             onChange={(e) => setMainCommentBody(e.target.value)}
           ></textarea>
+          <button
+            onClick={() => setIsShowEditModal(false)}
+            className="products-table-btn"
+            style={{
+              width: "100%",
+              margin: "0 auto",
+              justifyContent: "center",
+              display: "flex",
+              borderRadius: "0",
+            }}
+          >
+            بستن
+          </button>
         </EditModal>
       )}
       {isShowAcceptModal && (

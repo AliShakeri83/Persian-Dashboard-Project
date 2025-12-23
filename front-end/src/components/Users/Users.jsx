@@ -1,31 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Errorbox from "../Errorbox/Errorbox";
-import { allUsersInShop } from "../../Datas";
-import DetailsModal from "./../DetailsModal/DetailsModal";
-import DeleteModal from "./../DeleteModal/DeleteModal";
-import EditModal from "./../EditModal/EditModal";
+import DetailsModal from "../DetailsModal/DetailsModal";
+import DeleteModal from "../DeleteModal/DeleteModal";
+import EditModal from "../EditModal/EditModal";
 import { AiOutlineDollarCircle } from "react-icons/ai";
+import useUsers from "../../Hooks/useUsers";
 
 import "./Users.css";
 
 export default function Users() {
-  const [users, setUsers] = useState(allUsersInShop);
+  const {
+    addUser,
+    allUsers,
+    deleteUser: deleteUserMethod,
+    updateUser,
+  } = useUsers();
+  const [users, setUsers] = useState([]);
+
   const [isShowDetailsModal, setIsShowDetailsModal] = useState(false);
   const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);
   const [isShowEditModal, setIsShowEditModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [mainUserID, setMainUserID] = useState(null);
   const [mainUserInfos, setMainUserInfos] = useState({});
 
   const [userFirstnameNew, setUserFirstnameNew] = useState("");
   const [userLastnameNew, setUserLastnameNew] = useState("");
   const [userUsernameNew, setUserUsernameNew] = useState("");
-  const [userPasswordNew, setUserPasswordNew] = useState("");
   const [userPhoneNew, setUserPhoneNew] = useState("");
   const [userCityNew, setUserCityNew] = useState("");
   const [userEmailNew, setUserEmailNew] = useState("");
   const [userAddressNew, setUserAddressNew] = useState("");
-  const [userScoreNew, setUserScoreNew] = useState("");
-  const [userBuyNew, setUserBuyNew] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        setUsers(allUsers);
+      } catch (error) {
+        console.error("Error fetching comments:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, [allUsers]);
+
   const closeDetailsModal = () => {
     setIsShowDetailsModal(false);
   };
@@ -37,10 +58,7 @@ export default function Users() {
   };
   const deleteUser = () => {
     console.log("delete user");
-    const newUserArray = users.filter((user) => {
-      return user.id !== mainUserID;
-    });
-    setUsers(newUserArray);
+    deleteUserMethod(mainUserID);
     setIsShowDeleteModal(false);
   };
   const editUser = (e) => {
@@ -49,24 +67,26 @@ export default function Users() {
       firstname: userFirstnameNew,
       lastname: userLastnameNew,
       username: userUsernameNew,
-      password: userPasswordNew,
       phone: userPhoneNew,
       city: userCityNew,
       email: userEmailNew,
       address: userAddressNew,
-      score: userScoreNew,
-      buy: userBuyNew,
     };
-    const newUsersArray = users.map((user) => {
-      if (user.id === mainUserID) {
-        return newUserEdit;
-      }
-      return user;
-    });
-    setUsers(newUsersArray);
+    updateUser(mainUserID, newUserEdit);
     console.log("user is edited");
     setIsShowEditModal(false);
   };
+  if (isLoading) {
+    return (
+      <div className="cms-main">
+        <h1 className="cms-title">لیست کاربران ها</h1>
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <p className="loading-text">در حال دریافت داده‌ها...</p>
+        </div>
+      </div>
+    );
+  }
   return (
     <>
       <div className="cms-main">
@@ -78,7 +98,6 @@ export default function Users() {
               <tr>
                 <th>نام و نام خانوادگی</th>
                 <th>نام نمایشی در سایت</th>
-                <th>رمز عبور</th>
                 <th>شماره تماس</th>
                 <th>ایمیل</th>
               </tr>
@@ -90,7 +109,6 @@ export default function Users() {
                     {user.firstname} {user.lastname}
                   </td>
                   <td>{user.username}</td>
-                  <td>{user.password}</td>
                   <td>{user.phone}</td>
                   <td>{user.email}</td>
                   <td>
@@ -121,13 +139,10 @@ export default function Users() {
                         setUserFirstnameNew(user.firstname);
                         setUserLastnameNew(user.lastname);
                         setUserUsernameNew(user.username);
-                        setUserPasswordNew(user.password);
                         setUserPhoneNew(user.phone);
                         setUserCityNew(user.city);
                         setUserEmailNew(user.email);
                         setUserAddressNew(user.address);
-                        setUserScoreNew(user.score);
-                        setUserBuyNew(user.buy);
                       }}
                     >
                       ویرایش
@@ -147,19 +162,27 @@ export default function Users() {
                 <tr>
                   <th>شهر</th>
                   <th>آدرس</th>
-                  <th>امتیاز</th>
-                  <th>میزان خرید</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>{mainUserInfos.city}</td>
                   <td>{mainUserInfos.address}</td>
-                  <td>{mainUserInfos.score}</td>
-                  <td>{mainUserInfos.buy}</td>
                 </tr>
               </tbody>
             </table>
+            <button
+              onClick={() => setIsShowDetailsModal(false)}
+              className="products-table-btn"
+              style={{
+                width: "100%",
+                margin: "0 auto",
+                justifyContent: "center",
+                display: "flex",
+              }}
+            >
+              بستن
+            </button>
           </DetailsModal>
         )}
         {isShowDeleteModal && (
@@ -214,20 +237,7 @@ export default function Users() {
                 className="edit-user-info-input"
               />
             </div>
-            <div className="edit-user-info-inputs">
-              <span>
-                <AiOutlineDollarCircle />
-              </span>
-              <input
-                value={userPasswordNew}
-                onChange={(event) => {
-                  setUserPasswordNew(event.target.value);
-                }}
-                type="text"
-                placeholder="لطفا مقدار جدید را وارد کنید"
-                className="edit-user-info-input"
-              />
-            </div>
+
             <div className="edit-user-info-inputs">
               <span>
                 <AiOutlineDollarCircle />
@@ -284,34 +294,19 @@ export default function Users() {
                 className="edit-user-info-input"
               />
             </div>
-            <div className="edit-user-info-inputs">
-              <span>
-                <AiOutlineDollarCircle />
-              </span>
-              <input
-                value={userScoreNew}
-                onChange={(event) => {
-                  setUserScoreNew(event.target.value);
-                }}
-                type="text"
-                placeholder="لطفا مقدار جدید را وارد کنید"
-                className="edit-user-info-input"
-              />
-            </div>
-            <div className="edit-user-info-inputs">
-              <span>
-                <AiOutlineDollarCircle />
-              </span>
-              <input
-                value={userBuyNew}
-                onChange={(event) => {
-                  setUserBuyNew(event.target.value);
-                }}
-                type="text"
-                placeholder="لطفا مقدار جدید را وارد کنید"
-                className="edit-user-info-input"
-              />
-            </div>
+            <button
+              onClick={() => setIsShowEditModal(false)}
+              className="products-table-btn"
+              style={{
+                borderRadius: "0px",
+                width: "100%",
+                margin: "12px auto",
+                justifyContent: "center",
+                display: "flex",
+              }}
+            >
+              بستن
+            </button>
           </EditModal>
         )}
       </div>
