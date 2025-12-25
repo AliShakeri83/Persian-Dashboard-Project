@@ -100,8 +100,8 @@ export default function Orders() {
             {allOrders.map((order) => (
               <tr key={order.id}>
                 <td>{order.id}</td>
-                <td>{order.productID}</td>
-                <td>{order.userID}</td>
+                <td>{order.productName}</td>
+                <td>{order.username}</td>
                 <td>{order.date}</td>
                 <td>{order.hour}</td>
                 <td>{order.sale.toLocaleString()}</td>
