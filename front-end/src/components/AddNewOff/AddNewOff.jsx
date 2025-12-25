@@ -1,30 +1,49 @@
-import React, { useState } from "react";
-import Errorbox from "./../Errorbox/Errorbox";
-import { allProductsInShop, allOffInShop } from "./../../Datas";
+import React, { useEffect, useState } from "react";
 
 import "./AddNewOff.css";
 
-export default function AddNewOff() {
-  const [allProduct, setAllProduct] = useState(allProductsInShop);
-  const [allOff, setAllOff] = useState(allOffInShop);
+export default function AddNewOff({ addDiscount, allProducts }) {
+  const [allProduct, setAllProduct] = useState(allProducts);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [offCode, setOffCode] = useState("");
   const [offPrecent, setOffPrecent] = useState("");
   const [offDate, setOffDate] = useState("");
   const [offProductTitle, setOffProductTitle] = useState("");
 
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        setAllProduct(allProducts);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, [allProducts]);
+
   const addOffNewCode = (e) => {
     e.preventDefault();
     const newOffCode = {
-      id: allOff.length + 2,
       code: offCode,
       precent: offPrecent,
       productID: offProductTitle,
+      productName: offProductTitle,
       date: offDate,
       isActive: true,
     };
-    console.log(newOffCode);
-    setAllOff([...allOff, newOffCode]);
+    addDiscount(newOffCode);
+    emptyInputs();
+  };
+  const emptyInputs = () => {
+    setOffCode("");
+    setOffPrecent("");
+    setOffDate("");
+    setOffProductTitle("");
   };
   return (
     <>
@@ -66,6 +85,7 @@ export default function AddNewOff() {
 
             <div className="add-select-course">
               <select
+                value={offProductTitle}
                 onChange={(e) => setOffProductTitle(e.target.value)}
                 className="option-select-box"
                 id="cars"
