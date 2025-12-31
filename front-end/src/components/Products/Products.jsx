@@ -2,7 +2,7 @@ import AddNewProduct from "../AddNewProduct/AddNewProduct";
 import ProductsTable from "../ProductsTable/ProductsTable";
 import useProducts from "./../../Hooks/useProducts";
 
-export default function Products() {
+export default function Products({ search }) {
   const { allProducts, addProduct, deleteProduct, updateProduct } =
     useProducts();
 
@@ -13,6 +13,7 @@ export default function Products() {
         allProducts={allProducts}
         deleteProduct={deleteProduct}
         updateProduct={updateProduct}
+        search={search}
       />
     </>
   );

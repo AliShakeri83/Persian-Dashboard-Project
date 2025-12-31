@@ -12,6 +12,7 @@ export default function ProductsTable({
   allProducts = [],
   deleteProduct,
   updateProduct,
+  search = "",
 }) {
   const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);
   const [isShowDetailsModal, setIsShowDetailsModal] = useState(false);
@@ -27,6 +28,10 @@ export default function ProductsTable({
   const [productNewPopularity, setProductNewPopularity] = useState("");
   const [productNewSale, setProductNewSale] = useState("");
   const [productNewColors, setProductNewColors] = useState("");
+
+  const filteredProducts = allProducts.filter((product) =>
+    product.title.toLowerCase().includes(search.toLowerCase())
+  );
 
   const deleteModalSubmitAction = () => {
     deleteProduct(productID);
@@ -51,7 +56,7 @@ export default function ProductsTable({
     toast.success("محصول با موفقیت ویرایش شد");
   };
 
-  if (!allProducts.length) {
+  if (!filteredProducts.length) {
     return (
       <>
         <ToastContainer />
@@ -76,64 +81,64 @@ export default function ProductsTable({
         </thead>
 
         <tbody>
-          {allProducts.reverse().map((product) => (
-            <tr key={product.id} className="products-table-tr">
-              <td>
-                <img
-                  src={product.img_url}
-                  alt={product.title}
-                  className="products-table-img"
-                />
-              </td>
+          {filteredProducts
+            .slice()
+            .reverse()
+            .map((product) => (
+              <tr key={product.id} className="products-table-tr">
+                <td>
+                  <img
+                    src={product.img_url}
+                    alt={product.title}
+                    className="products-table-img"
+                  />
+                </td>
 
-              <td>{product.title}</td>
+                <td>{product.title}</td>
+                <td>{Number(product.price).toLocaleString()} تومان</td>
+                <td>{product.count}</td>
 
-              <td>{Number(product.price).toLocaleString()} تومان</td>
+                <td>
+                  <button
+                    className="products-table-btn"
+                    onClick={() => {
+                      setMainProductInfos(product);
+                      setIsShowDetailsModal(true);
+                    }}
+                  >
+                    جزییات
+                  </button>
 
-              <td>{product.count}</td>
+                  <button
+                    className="products-table-btn"
+                    onClick={() => {
+                      setProductID(product.id);
+                      setIsShowDeleteModal(true);
+                    }}
+                  >
+                    حذف
+                  </button>
 
-              <td>
-                <button
-                  className="products-table-btn"
-                  onClick={() => {
-                    setMainProductInfos(product);
-                    setIsShowDetailsModal(true);
-                  }}
-                >
-                  جزییات
-                </button>
-
-                <button
-                  className="products-table-btn"
-                  onClick={() => {
-                    setProductID(product.id);
-                    setIsShowDeleteModal(true);
-                  }}
-                >
-                  حذف
-                </button>
-
-                <button
-                  className="products-table-btn"
-                  onClick={() => {
-                    setProductID(product.id);
-                    setMainProductInfos(product);
-                    setProductNewTitle(product.title);
-                    setProductNewPrice(product.price);
-                    setProductNewCount(product.count);
-                    setProductNewImg(product.img_url);
-                    setProductNewPopularity(product.popularity);
-                    setProductNewSale(product.sale);
-                    setProductNewColors(product.colors);
-
-                    setIsShowEditModal(true);
-                  }}
-                >
-                  ویرایش
-                </button>
-              </td>
-            </tr>
-          ))}
+                  <button
+                    className="products-table-btn"
+                    onClick={() => {
+                      setProductID(product.id);
+                      setMainProductInfos(product);
+                      setProductNewTitle(product.title);
+                      setProductNewPrice(product.price);
+                      setProductNewCount(product.count);
+                      setProductNewImg(product.img_url);
+                      setProductNewPopularity(product.popularity);
+                      setProductNewSale(product.sale);
+                      setProductNewColors(product.colors);
+                      setIsShowEditModal(true);
+                    }}
+                  >
+                    ویرایش
+                  </button>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
 
@@ -165,6 +170,7 @@ export default function ProductsTable({
               </tr>
             </tbody>
           </table>
+
           <button
             onClick={() => setIsShowDetailsModal(false)}
             className="products-table-btn"
@@ -208,6 +214,7 @@ export default function ProductsTable({
               />
             </div>
           ))}
+
           <button
             onClick={() => setIsShowEditModal(false)}
             className="products-table-btn"

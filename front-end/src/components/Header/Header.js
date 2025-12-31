@@ -4,7 +4,7 @@ import { BsBrightnessHigh } from "react-icons/bs";
 
 import "./Header.css";
 
-export default function Header() {
+export default function Header({ search, setSearch }) {
   return (
     <div className="header">
       <div className="admin-profile">
@@ -17,7 +17,12 @@ export default function Header() {
 
       <div className="header-left-section">
         <div className="search-box">
-          <input type="text" placeholder="جستجو کنید ..." />
+          <input
+            type="text"
+            placeholder="جستجو کنید ..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
           <button>جست و جو</button>
         </div>
 
