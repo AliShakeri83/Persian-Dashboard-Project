@@ -49,7 +49,7 @@ export default function ProductsTable({
       img_url: productNewImg,
       popularity: productNewPopularity,
       sale: productNewSale,
-      colors: productNewColors,
+      color: productNewColors,
     });
 
     setIsShowEditModal(false);

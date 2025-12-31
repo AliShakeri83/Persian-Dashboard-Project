@@ -23,12 +23,8 @@ export default function Header({ search, setSearch }) {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <button>جست و جو</button>
         </div>
 
-        <button className="header-left-icon">
-          <AiOutlineBell />
-        </button>
         <button className="header-left-icon">
           <BsBrightnessHigh />
         </button>
