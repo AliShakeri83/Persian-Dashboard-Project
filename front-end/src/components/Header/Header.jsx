@@ -1,10 +1,10 @@
 import React from "react";
-import { AiOutlineBell } from "react-icons/ai";
+import { CiDark } from "react-icons/ci";
 import { BsBrightnessHigh } from "react-icons/bs";
 
 import "./Header.css";
 
-export default function Header({ search, setSearch }) {
+export default function Header({ search, setSearch, isDark, setIsDark }) {
   return (
     <div className="header">
       <div className="admin-profile">
@@ -25,8 +25,8 @@ export default function Header({ search, setSearch }) {
           />
         </div>
 
-        <button className="header-left-icon">
-          <BsBrightnessHigh />
+        <button onClick={() => setIsDark(!isDark)} className="header-left-icon">
+          {isDark ? <BsBrightnessHigh /> : <CiDark />}
         </button>
       </div>
     </div>

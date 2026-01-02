@@ -9,9 +9,9 @@ import { NavLink } from "react-router-dom";
 
 import "./Sidebar.css";
 
-export default function Sidebar() {
+export default function Sidebar({ isDark }) {
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${isDark ? "dark" : ""}`}>
       <h1 className="sidebar-title">به داشبورد خود خوش آمدید</h1>
       <ul className="sidebar-links">
         <NavLink to={"/"}>

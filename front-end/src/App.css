@@ -1,5 +1,54 @@
+:root {
+  --sidebar-bg: #6c48bb;
+  --sidebar-text: #ffffff;
+  --sidebar-hover-bg: #391588;
+  --sidebar-hover-text: #ffffff;
+  --sidebar-border: #6c48bb;
+
+  --header-bg: #ffffff;
+  --header-text: #1c1f23;
+  --header-border: #e5e7eb;
+  --header-input-bg: #f6f7f9;
+  --header-input-text: #1c1f23;
+  --header-icon: #374151;
+}
+
+.dark {
+  --sidebar-bg: #0f141a;
+  --sidebar-text: #e5e7eb;
+  --sidebar-hover-bg: #1a1f25;
+  --sidebar-hover-text: #60a5fa;
+  --sidebar-border: #253040;
+
+  --header-bg: #0f141a;
+  --header-text: #e5e7eb;
+  --header-border: #253040;
+  --header-input-bg: #1a1f25;
+  --header-input-text: #e5e7eb;
+  --header-icon: #60a5fa;
+}
+
 .main {
   flex: 4;
   padding: 20px;
   padding-right: 280px;
+}
+
+.main.dark .header {
+  background: #0b0f14;
+  color: #e5e7eb;
+  padding: 8px;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+.main.dark .search-box input {
+  background: #1a1f25;
+  color: #e5e7eb;
+  border: 1px solid #253040;
+}
+.main.dark .header-left-icon {
+  color: #60a5fa;
 }
